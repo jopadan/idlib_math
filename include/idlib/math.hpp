@@ -18,6 +18,12 @@
 namespace stdx = std::experimental;
 using namespace stdx::parallelism_v2;
 
+namespace std
+{
+template<typename T, typename U>
+constexpr bool is_decay_equ = std::is_same_v<std::decay_t<T>,U>;
+};
+
 namespace id::math::types
 {
 
@@ -78,6 +84,7 @@ template<size_t N = 1>
 using s64 = i64<N>;
 template<size_t N = 1>
 using u64 = std::conditional_t<N == 1, khronos_uint64_t, vec<khronos_uint64_t, N>>;
+
 using qboolean = khronos_boolean_enum_t;
 const qboolean qfalse = KHRONOS_FALSE;
 const qboolean qtrue  = KHRONOS_TRUE;
@@ -102,10 +109,10 @@ using vec4l_t  = i64<4>;
 using vec4lu_t = u64<4>;
 
 template<sca T>
-vector_aligned<T,4> load3(T src[3], T w) { return (vector_aligned<T,4>){ src[0], src[1], src[2], w }; }
+inline vector_aligned<T,4> load3(T src[3], T w) { return (vector_aligned<T,4>){ src[0], src[1], src[2], w }; }
 
 template<sca T>
-element_aligned<T,3> store3(vector_aligned<T, 4> src, T w = 1)
+inline element_aligned<T,3> store3(vector_aligned<T, 4> src, T w = 1)
 {
 	src[3] *= w;
 	if(src[3] != 0 && src[3] != 1)
@@ -113,5 +120,10 @@ element_aligned<T,3> store3(vector_aligned<T, 4> src, T w = 1)
 	return (element_aligned<T,3>){ src[0], src[1], src[2] };
 }
 
+template<sca T, size_t N, typename... I>
+inline auto permute(const vec<T, N>& src, const I... args)
+{
+	return (vec<T,sizeof...(I)>){ src[args % N]... };
+}
 };
 

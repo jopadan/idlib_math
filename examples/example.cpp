@@ -9,6 +9,8 @@ int main(int argc, char** argv)
 	f64<4> v4 = load3<f64<1>>(v3.data(), 5);
 	v3 = store3<f64<1>>(v4);
 
+	v4 = permute<f64<1>,4>(v4, 3,1,2,0);
+	v3 = permute<f64<1>,3>(v3, 2,1,0);
 	printf("v3: [%f %f %f]: %zu/%zu\n", v3[0], v3[1], v3[2], sizeof(v3), alignof(v3));
 	printf("v4: [%f %f %f %f]: %zu/%zu\n", v4[0], v4[1], v4[2], v4[3], sizeof(v4), alignof(v4));
 	exit(EXIT_SUCCESS);
