@@ -1,6 +1,6 @@
 # idlib_math
-idtech1 C++26 SIMD math library inspired by [1]'s[2]
+idtech1 C++26 SIMD math library inspired by [Bill Currie][1]'s [Quakeforge SIMD][2]
 
-[1] [Bill Currie](http://github.com/taniwha)
-[2] [Quakeforge](http://github.com/quakeforge/quakeforge)
+[1]: http://github.com/taniwha
+[2]: http://github.com/quakeforge/quakeforge/include/QF/simd
 
