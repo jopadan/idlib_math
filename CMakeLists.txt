@@ -1,7 +1,7 @@
 cmake_minimum_required( VERSION 3.5 )
 
 project( idlib_math VERSION 0.1 LANGUAGES CXX )
-set(PROJECT_DESCRIPTION "idtech2 C++26 SIMD math library inspired by QF/simd")
+set(PROJECT_DESCRIPTION "idtech2/3 C++26 SIMD math library inspired by QF/simd")
 
 include(GNUInstallDirs)
 
