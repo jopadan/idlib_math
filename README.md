@@ -1,6 +1,6 @@
 # idlib_math
 
-idtech2 C++26 SIMD math library inspired by [Bill Currie][1]'s [Quakeforge SIMD][3] and [TrenchBroom][4]'s [vecmath/vm][5] using [OpenGL/KHR][6] and [GCC Vector Extension][7] types
+idtech2/3 C++26 SIMD math library inspired by [Bill Currie][1]'s [Quakeforge SIMD][3] and [TrenchBroom][4]'s [vecmath/vm][5] using [OpenGL/KHR][6] and [GCC Vector Extension][7] types
 
 # Links
 
