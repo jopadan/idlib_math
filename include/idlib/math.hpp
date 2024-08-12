@@ -86,8 +86,10 @@ const qboolean qfalse = KHRONOS_FALSE;
 const qboolean qtrue  = KHRONOS_TRUE;
 
 /* floating point scalar type */
-template<sca T = float>
-using vec_t = T;
+using vecf_t   = f32<1>;
+using vecd_t   = f64<1>;
+
+using vec_t = vecf_t;
 
 using vec3f_t  = f32<3>;
 using vec3d_t  = f64<3>;
