@@ -38,10 +38,6 @@ concept sca = ari<T>;
 template<size_t N>
 concept power_of_two = (std::popcount(N) == 1);
 
-/* floating point scalar type */
-template<sca T = float>
-using vec_t = T;
-
 /* element aligned vector type */
 template<sca T, size_t ROWS>
 using element_aligned = std::array<T,ROWS>;
@@ -89,6 +85,10 @@ using qboolean = khronos_boolean_enum_t;
 const qboolean qfalse = KHRONOS_FALSE;
 const qboolean qtrue  = KHRONOS_TRUE;
 
+/* floating point scalar type */
+template<sca T = float>
+using vec_t = T;
+
 using vec3f_t  = f32<3>;
 using vec3d_t  = f64<3>;
 using vec5f_t  = f32<5>;
@@ -120,10 +120,30 @@ inline element_aligned<T,3> store3(vector_aligned<T, 4> src, T w = 1)
 	return (element_aligned<T,3>){ src[0], src[1], src[2] };
 }
 
+template<sca T, size_t SRC, size_t DST, T NET = (T)0> 
+auto load(const element_aligned<T, SRC>& src)
+{
+	static const size_t LEN = power_of_two<DST> ? DST : std::bit_ceil(DST);
+	vector_aligned<T,LEN> dst;
+	std::copy_n(&src[0], LEN <= SRC ? LEN : SRC, &dst[0]);
+	return dst;
+}
+
+template<sca T, size_t SRC, size_t DST = SRC, T NET = (T)0>
+auto store(const vector_aligned<T,SRC>& src)
+{
+	element_aligned<T,DST> dst;
+	if(DST > SRC)
+		std::fill(&dst[SRC], &dst[DST - 1], NET);
+	std::copy_n(&src[0], DST <= SRC ? DST : SRC, &dst[0]);
+	return dst;
+}
+
 template<sca T, size_t N, typename... I>
 inline auto permute(const vec<T, N>& src, const I... args)
 {
 	return (vec<T,sizeof...(I)>){ src[args % N]... };
 }
+
 };
 
