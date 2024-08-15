@@ -85,30 +85,53 @@ using qboolean = khronos_boolean_enum_t;
 const qboolean qfalse = KHRONOS_FALSE;
 const qboolean qtrue  = KHRONOS_TRUE;
 
-/* floating point scalar type */
-using vecf_t   = f32<1>;
-using vecd_t   = f64<1>;
+using qint8_t     = i8<1>;
+using quint8_t    = u8<1>;
+using qint16_t    = i16<1>;
+using quint16_t   = u16<1>;
+using qint32_t    = i32<1>;
+using quint32_t   = u32<1>;
+using qint64_t    = i64<1>;
+using quint64_t   = u64<1>;
+using qintptr_t   = GLintptr;
+using quintptr_t  = GLuintptr;
+using qbyte       = quint8_t;
+using byte_vec4_t = u8<4>;
 
-using vec_t = vecf_t;
+using vecf_t      = f32<1>;
+using vecd_t      = f64<1>;
 
-using vec3f_t  = f32<3>;
-using vec3d_t  = f64<3>;
-using vec5f_t  = f32<5>;
-using vec5d_t  = f64<5>;
+using vec_t       = vecf_t;
 
-using vec2f_t  = f32<2>;
-using vec2d_t  = f64<2>;
-using vec2i_t  = i32<2>;
-using vec2u_t  = u32<2>;
-using vec2l_t  = i64<2>;
-using vec2lu_t = u64<2>;
+using vec2_t      = vec<vec_t, 2>;
+using vec3_t      = vec<vec_t, 3>;
+using vec4_t      = vec<vec_t, 4>;
+using vec5_t      = vec<vec_t, 5>;
 
-using vec4f_t  = f32<4>;
-using vec4d_t  = f64<4>;
-using vec4i_t  = i32<4>;
-using vec4u_t  = u32<4>;
-using vec4l_t  = i64<4>;
-using vec4lu_t = u64<4>;
+using vec3f_t     = f32<3>;
+using vec3d_t     = f64<3>;
+using vec5f_t     = f32<5>;
+using vec5d_t     = f64<5>;
+
+using vec2f_t     = f32<2>;
+using vec2d_t     = f64<2>;
+using vec2i_t     = i32<2>;
+using vec2u_t     = u32<2>;
+using vec2l_t     = i64<2>;
+using vec2lu_t    = u64<2>;
+
+using vec4f_t     = f32<4>;
+using vec4d_t     = f64<4>;
+using vec4i_t     = i32<4>;
+using vec4u_t     = u32<4>;
+using vec4l_t     = i64<4>;
+using vec4lu_t    = u64<4>;
+
+using avec4_t     = vec4_t;
+using avec3_t alignas(sizeof(vec_t) * 4) = vec3_t;
+
+using qcolor4f    = vec4f_t;
+using qcolor4b    = byte_vec4_t;
 
 template<sca T>
 inline vector_aligned<T,4> load3(T src[3], T w) { return (vector_aligned<T,4>){ src[0], src[1], src[2], w }; }
