@@ -18,13 +18,7 @@
 namespace stdx = std::experimental;
 using namespace stdx::parallelism_v2;
 
-namespace std
-{
-template<typename T, typename U>
-constexpr bool is_decay_equ = std::is_same_v<std::decay_t<T>,U>;
-};
-
-namespace id::math::types
+namespace id::math::type
 {
 
 /* arithmetic type */
@@ -94,7 +88,7 @@ using quint32_t   = u32<1>;
 using qint64_t    = i64<1>;
 using quint64_t   = u64<1>;
 using qintptr_t   = GLintptr;
-using quintptr_t  = GLuintptr;
+using quintptr_t  = std::make_unsigned_t<qintptr_t>;
 using qbyte       = quint8_t;
 using byte_vec4_t = u8<4>;
 

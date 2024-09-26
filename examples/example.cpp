@@ -1,6 +1,6 @@
 #include <idlib/math.hpp>
 
-using namespace id::math::types;
+using namespace id::math::type;
 
 int main(int argc, char** argv)
 {
